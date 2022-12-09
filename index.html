@@ -27,6 +27,8 @@
                 this.getXKCD = this.getXKCD.bind(this);
                 this.prev = this.prev.bind(this);
                 this.next = this.next.bind(this);
+                this.first = this.first.bind(this);
+                this.last = this.last.bind(this);
                 this.randomComic = this.randomComic.bind(this);
                 this.getXKCD();
             }
@@ -70,6 +72,16 @@
               return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum and minimum are inclusive
             }
             
+            first() {
+              this.state.comicNumber = 1;
+              this.getXKCD();
+            }
+            
+            last() {
+              this.state.comicNumber = this.state.lastComic;
+              this.getXKCD();
+            }
+            
             randomComic() {
               this.state.comicNumber = this.getRandom(1, this.state.lastComic);
               this.getXKCD();
@@ -85,7 +97,9 @@
                             <p>{this.state.current.alt}</p>
                             <button onClick={this.prev}>Previous</button>
                             <button onClick={this.next}>Next</button>
-                            <button onClick={this.prev}>Random</button>
+                            <button onClick={this.randomComic}>Random</button>
+                            <button onClick={this.first}>First</button>
+                            <button onClick={this.last}>Last</button>
                             <p><i>#{this.state.current.num}, 
                             drawn on {this.state.current.month}-
                             {this.state.current.day}-
